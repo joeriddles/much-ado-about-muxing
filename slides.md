@@ -135,7 +135,7 @@ Some of these packages do much more.
 | Subrouting     | ❌                                                | ✅ `r.Subrouter()`                             | ✅ `r.Route(...)`                                            | ✅ `e.Group(...)`                   | ✅ `r.Group(...)`                        |
 | Named URLs     | ❌                                                | ✅ `r.Name("index")`                           | ❌                                                           | ✅ `route.Name="index"`             | ❌                                       |
 | Other features |                                                  | Schemes, headers, queries                     | Compatible with `net/http`                                  | Framework                          | Framework                               |
-| Precedence     | Specific                                         | In order                                      | Static, param, * ?                                          | Static, param, *                   | N/A, unambigous                         |
+| Precedence     | Specific                                         | In order                                      | Static, param, * ?                                          | Static, param, *                   | Unambigous                              |
 | Data structure | Radix tree                                       | List                                          | Radix tree                                                  | Radix tree                         | Radix tree                              |
 ---
 
