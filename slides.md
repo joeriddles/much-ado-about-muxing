@@ -26,6 +26,9 @@ section table {
 section table thead th {
   --color-background: black;
 }
+section table tbody td {
+  vertical-align: baseline;
+}
 .emphasis {
     font-weight: bolder;
     color: #11779C;
@@ -121,19 +124,19 @@ We're focused on muxing/routing features.
 Some of these packages do much more.
 -->
 
-| Features       | [ServeMux](https://pkg.go.dev/net/http#ServeMux) | [gorilla/mux](https://github.com/gorilla/mux) | [chi](https://github.com/go-chi/chi)                      | [echo](https://echo.labstack.com/) | [gin](https://github.com/gin-gonic/gin) |
-| -------------- | ------------------------------------------------ | --------------------------------------------- | --------------------------------------------------------- | ---------------------------------- | --------------------------------------- |
-| Fixed          | ✅                                                | ✅                                             | ✅                                                         | ✅                                  | ✅                                       |
-| HTTP Method    | 1.22+ `"GET /"`                                  | `r.Methods("GET")`                            | `r.Get`                                                   | `e.GET`                            | `r.GET`                                 |
-| Segment        | 1.22+ `"/{id}"`                                  | `"/{id}"`                                     | `"/{id}"`                                                 | `"/:id"`                           | `"/:id"`                                |
-| Wildcard       | 1.22+ `"/static/"`                               | `r.PathPrefix("/static")`                     | `"/static/*"`                                             | `/static/*`                        | `/static/*`                             |
-| Domain         | ✅                                                | `r.Host("example.com")`                       | [go-chi/hostrouter](https://github.com/go-chi/hostrouter) | ❌                                  | ❌                                       |
-| Regex          | ❌                                                | `"/{id:[0-9]+}"`                              | `"/{id:[0-9]+}"`                                          | ❌                                  | ❌                                       |
-| Subrouting     | ❌                                                | `r.Subrouter()`                               | `r.Route(...)`                                            | `e.Group(...)`                     | `r.Group(...)`                          |
-| Named URLs     | ❌                                                | `r.Name("index")`                             | ❌                                                         | `route.Name="index"`               | ❌                                       |
-| Other features |                                                  | Schemes, headers, queries                     | Compatible with `net/http`                                | Framework                          | Framework                               |
-| Precedence     | Specific                                         | In order                                      | Static, param, * ?                                        | Static, param, *                   | N/A, unambigous                         |
-| Data structure | Radix tree                                       | List                                          | Radix tree                                                | Radix tree                         | Radix tree                              |
+| Features       | [ServeMux](https://pkg.go.dev/net/http#ServeMux) | [gorilla/mux](https://github.com/gorilla/mux) | [chi](https://github.com/go-chi/chi)                        | [echo](https://echo.labstack.com/) | [gin](https://github.com/gin-gonic/gin) |
+| -------------- | ------------------------------------------------ | --------------------------------------------- | ----------------------------------------------------------- | ---------------------------------- | --------------------------------------- |
+| Fixed          | ✅                                                | ✅                                             | ✅                                                           | ✅                                  | ✅                                       |
+| HTTP Method    | ✅ `"GET /"` 1.22+                                | ✅ `r.Methods("GET")`                          | ✅ `r.Get`                                                   | ✅ `e.GET`                          | ✅ `r.GET`                               |
+| Segment        | ✅ `"/{id}"` 1.22+                                | ✅ `"/{id}"`                                   | ✅ `"/{id}"`                                                 | ✅ `"/:id"`                         | ✅ `"/:id"`                              |
+| Wildcard       | ✅ `"/static/"` 1.22+                             | ✅ `r.PathPrefix("/static")`                   | ✅ `"/static/*"`                                             | ✅ `/static/*`                      | ✅ `/static/*`                           |
+| Domain         | ✅                                                | ✅ `r.Host("example.com")`                     | ✅ [go-chi/hostrouter](https://github.com/go-chi/hostrouter) | ❌                                  | ❌                                       |
+| Regex          | ❌                                                | ✅ `"/{id:[0-9]+}"`                            | ✅ `"/{id:[0-9]+}"`                                          | ❌                                  | ❌                                       |
+| Subrouting     | ❌                                                | ✅ `r.Subrouter()`                             | ✅ `r.Route(...)`                                            | ✅ `e.Group(...)`                   | ✅ `r.Group(...)`                        |
+| Named URLs     | ❌                                                | ✅ `r.Name("index")`                           | ❌                                                           | ✅ `route.Name="index"`             | ❌                                       |
+| Other features |                                                  | Schemes, headers, queries                     | Compatible with `net/http`                                  | Framework                          | Framework                               |
+| Precedence     | Specific                                         | In order                                      | Static, param, * ?                                          | Static, param, *                   | N/A, unambigous                         |
+| Data structure | Radix tree                                       | List                                          | Radix tree                                                  | Radix tree                         | Radix tree                              |
 ---
 
 <!-- _class: lead -->
