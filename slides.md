@@ -51,6 +51,17 @@ Joe Riddle
 
 ---
 
+# Outline
+
+- [What's muxing?](#whats-muxing)
+- [Muxing in Go 1.21](#muxing-in-go-121)
+- [Muxing in Go 1.21 — Features](#muxing-in-go-121-features)
+- [Changes in Go 1.22 — New Features](#changes-in-go-122new-features)
+- [Examples](#examples)
+- [`ServeMux` vs. the other guys](#servemux-vs-the-other-guys)
+
+---
+
 # What's muxing? 
 
 > `ServeMux` is an HTTP request multiplexer. It matches the URL of each incoming request against a list of registered patterns and calls the handler for the pattern that most closely matches the URL. 
@@ -91,6 +102,8 @@ Note the trailing slash in `/api/`. This means it matches `/api/*`.
 
 <!-- _class: lead -->
 # Examples
+
+https://joeriddles.github.io/much-ado-about-muxing/
 
 ---
 
