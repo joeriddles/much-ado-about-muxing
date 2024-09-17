@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <title>Mux</title>
+
+  <style>
+    * {
+      font-family: monospace;
+    }
+
+    h1 {
+      margin: 4px 0px;
+    }
+
+    body {
+      height: 100vh;
+      max-width: 80ch;
+      margin: auto;
+      padding: 0px 4px;
+    }
+
+    div {
+      margin-bottom: 8px;
+    }
+
+    textarea {
+      background-color: #171717;
+      border-radius: 8px;
+      color: white;
+      height: 70%;
+      max-width: 98%;
+    }
+
+    #stdout {
+      padding: 4px;
+      background-color: gainsboro;
+      border-radius: 8px;
+      display: none;
+    }
+
+    #stderr {
+      padding: 4px;
+      background-color: #171717;
+      color: red;
+      border-radius: 8px;
+      display: none;
+    }
+  </style>
+
+  <script src="wasm_exec.js"></script>
+  <script src="examples.js"></script>
+</head>
+
+<body>
+  <h1 id="title"></h1>
+  <textarea id="ide" rows="10" cols="80" wrap="off" spellcheck="false"></textarea>
+  <div>
+    <button onclick="prevSnippet();">⬅️</button>
+    <button onclick="nextSnippet();">➡️</button>
+    <button id="run">🏃</button>
+  </div>
+  <div>
+    <div id="stdout"></div>
+    <div id="stderr" style="color: red; background: black;"></div>
+  </div>
+
+  <script>
+    // Code snippets
+    let snippetIndex = 0;
+
+    function prevSnippet() {
+      snippetIndex = (snippetIndex - 1 + EXAMPLES.length) % EXAMPLES.length;
+      updateSnippet();
+    }
+
+    function nextSnippet() {
+      snippetIndex = (snippetIndex + 1) % EXAMPLES.length;
+      updateSnippet();
+    }
+
+    function updateSnippet() {
+      const snippet = EXAMPLES[snippetIndex];
+      document.getElementById("title").textContent = snippet.title;
+      document.getElementById("ide").textContent = snippet.code;
+      sessionStorage.setItem("snippets:index", snippetIndex);
+    }
+
+    const cachedIndex = sessionStorage.getItem("snippets:index");
+    if (cachedIndex != null) {
+      snippetIndex = parseInt(cachedIndex);
+    }
+
+    updateSnippet();
+
+    // WASM
+    const go = new Go();
+
+    WebAssembly.instantiateStreaming(fetch("main.wasm"), go.importObject).then(
+      (result) => {
+        go.run(result.instance);
+      }
+    );
+
+    // Handlers
+    const titleEl = document.getElementById("title");
+    const buttonEl = document.getElementById("run");
+    const codeEl = document.getElementById("ide");
+    const stdoutEl = document.getElementById("stdout");
+    const stderrEl = document.getElementById("stderr");
+
+    buttonEl.addEventListener("click", () => {
+      stdoutEl.style.display = "none";
+      stdoutEl.innerText = "";
+      stderrEl.style.display = "none";
+      stderrEl.innerText = "";
+
+      const { stdout, stderr } = goExec(codeEl.value);
+      if (stdout) {
+        stdoutEl.style.display = "block";
+        stdoutEl.innerText = stdout;
+      }
+      if (stderr) {
+        stderrEl.style.display = "block";
+        stderrEl.innerText = stderr;
+      }
+    });
+  </script>
+</body>
+
+</html>
