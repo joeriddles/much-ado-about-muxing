@@ -4,5 +4,9 @@
       "GOOS": "js",
       "GOARCH": "wasm"
     },
+  },
+  "[markdown]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
   }
 }

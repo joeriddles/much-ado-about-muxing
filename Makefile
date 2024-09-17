@@ -1,4 +1,7 @@
-.PHONY: build serve examples
+.PHONY: build serve examples slides
+
+slides:
+	marp --watch slides.md --html
 
 examples:
 	cd examples && python3 combine.py

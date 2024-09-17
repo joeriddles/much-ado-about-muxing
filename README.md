@@ -25,6 +25,11 @@ Udpate `examples.js`:
 $ make examples
 ```
 
+Update slides:
+```shell
+$ make slides
+```
+
 ### Resources
 - [`ServeMux` docs](https://pkg.go.dev/net/http#ServeMux)
 - [net/http: enhanced ServeMux routing #61410](https://github.com/golang/go/issues/61410), released in 1.22
