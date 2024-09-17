@@ -19,7 +19,7 @@ def to_title(filename: str) -> str:
 
 
 if __name__ == "__main__":
-    folders = [filename for filename in os.listdir() if os.path.isdir(filename)]
+    folders = sorted([filename for filename in os.listdir() if os.path.isdir(filename)])
 
     go: list[dict] = []
     for folder in folders:

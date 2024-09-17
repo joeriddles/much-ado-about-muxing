@@ -8,9 +8,27 @@ Go 1.22 came out recently and added some much needed improvements to the standar
 
 _A presentation for the Spokane Go User Group: https://www.meetup.com/spokane-go-users-group/events/303409967/._
 
+### Development
+
+Run local web server:
+```shell
+$ make serve
+```
+
+Build Go WASM:
+```shell
+$ make build
+```
+
+Udpate `examples.js`:
+```shell
+$ make examples
+```
+
 ### Resources
 - [`ServeMux` docs](https://pkg.go.dev/net/http#ServeMux)
 - [net/http: enhanced ServeMux routing #61410](https://github.com/golang/go/issues/61410), released in 1.22
     - [net/http: add methods and path variables to ServeMux patterns #60227](https://github.com/golang/go/discussions/60227)
 - [net/http: expose matched pattern in Request #66405](https://github.com/golang/go/issues/66405), released in 1.23.1
+- [Different approaches to HTTP routing in Go](https://benhoyt.com/writings/go-routing/)
 - [Notes on running Go in the browser with WebAssembly](https://eli.thegreenplace.net/2024/notes-on-running-go-in-the-browser-with-webassembly/)

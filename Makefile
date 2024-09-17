@@ -1,4 +1,7 @@
-.PHONY: build serve
+.PHONY: build serve examples
+
+examples:
+	cd examples && python3 combine.py
 
 build: wasm_exec.js
 	GOOS=js GOARCH=wasm go build -o main.wasm main.go
